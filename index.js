@@ -34,9 +34,10 @@ app.post("/api/v1*", async (request, response) => {
     method: request.method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: authKey,
+      "Authorization": authKey,
     },
-    body: typeof body === 'object' ? JSON.stringify(body) : '{}',
+    body
+    //body: typeof body === 'object' ? JSON.stringify(body) : '{}',
   };
 
   console.log('🤖️ payload：\n', payload);
