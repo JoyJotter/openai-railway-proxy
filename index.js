@@ -11,7 +11,7 @@ app.post("/api/v1*", async (request, response) => {
   const url = "https://api.openai.com" + request.url.substring(4);
   //const fetchAPI = new URL(url);
 
-  console.log('🤖️ 请求将转发至：\n', fetchAPI);
+  console.log('🤖️ 请求将转发至：\n', url);
 
   // 部分代理工具，请求由浏览器发起，跨域请求时会先发送一个 preflight 进行检查，也就是 OPTIONS 请求
   // 需要响应该请求，否则后续的 POST 会失败
@@ -41,7 +41,7 @@ app.post("/api/v1*", async (request, response) => {
 
   console.log('🤖️ payload：\n', payload);
   console.log('🤖️ fetch 的东西：\n', {
-    fetchAPI,
+    url,
     payload
   });
 
