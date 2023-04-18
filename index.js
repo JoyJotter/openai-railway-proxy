@@ -24,7 +24,7 @@ app.post("/api/v1*", async (request, response) => {
   if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
   let body;
-  if (request.method === 'POST') body = await request.json();
+  if (request.method === 'POST') body = await request.body;
 
   const authKey = request.headers.get('Authorization');
   if (!authKey) return new Response("Not allowed", { status: 403 });
