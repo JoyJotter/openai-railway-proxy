@@ -1,11 +1,17 @@
 {
-  "name": "nodejs-app",
+  "name": "openai-forward-proxy",
   "version": "1.0.0",
-  "description": "A minimal Node.js web application.",
+  "description": "An openai forward proxy",
   "main": "index.js",
-  "author": "alphasec",
+  "author": "hanya",
+  "contributors": [{
+			"name": "xunan"
+		},{
+      "name": "hanya"
+    }],
   "license": "MIT",
    "dependencies": {
+    "express":"^4.17.1"
   },
   "scripts": {
     "start": "node index.js"
