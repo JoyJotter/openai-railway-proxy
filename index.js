@@ -25,7 +25,7 @@ app.post("/api/v1*", async (request, response) => {
   let body;
   if (request.method === 'POST') body = request.body;
 
-  const authKey = request.headers.Authorization;
+  const authKey = request.headers.Authorization.json();
   console.log('🤖️ authKey：\n', authKey);
 
   if (!authKey) return new Response("Not allowed", { status: 403 });
