@@ -6,13 +6,12 @@ const app = express();
 app.use(express.json());
 
 app.post("/api/v1*", async (request, response) => {
-  console.log('POST 请求已接收：\n', JSON.stringify(request.body,null,"\t")); //JSON.stringify(request.body,null,"\t") 让 console 的 json 格式化，更易读
-  console.log(request.url);
-
-  const url = "https://api.openai.com" + request.url;
+  console.log('🤖️ POST 请求已接收：\n', JSON.stringify(request.body, null, "\t")); //JSON.stringify(request.body,null,"\t") 让 console 的 json 格式化，更易读
+  
+  const url = "https://api.openai.com" + request.url.substring(4);
   const fetchAPI = new URL(url);
 
-  console.log(fetchAPI);
+  console.log('🤖️ 请求将转发至：', fetchAPI);
 
 
   // 部分代理工具，请求由浏览器发起，跨域请求时会先发送一个 preflight 进行检查，也就是 OPTIONS 请求
@@ -43,7 +42,7 @@ app.post("/api/v1*", async (request, response) => {
   response = await fetch(fetchAPI, payload);
   if (body && body.stream !== true) {
     const results = await response.json();
-    return new Response(JSON.stringify(results,null,"\t"), {
+    return new Response(JSON.stringify(results, null, "\t"), {
       status: response.status,
       headers: {
         "Content-Type": "application/json",
