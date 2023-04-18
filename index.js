@@ -31,13 +31,12 @@ app.post("/api/v1*", async (request, response) => {
   if (!authKey) return new Response("Not allowed", { status: 403 });
 
   const payload = {
-    method: request.method,
+    method: "POST",
     headers: {
       'Content-Type': "application/json",
       'Authorization': authKey
     },
-    body
-    //body: typeof body === 'object' ? JSON.stringify(body) : '{}',
+    body, //body: typeof body === 'object' ? JSON.stringify(body) : '{}',
   };
 
   console.log('🤖️ payload：\n', payload);
