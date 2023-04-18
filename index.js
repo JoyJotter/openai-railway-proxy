@@ -6,45 +6,22 @@ const app = express();
 app.use(express.json());
 
 app.post("/api/v1*", async (request, response) => {
-  console.log('🤖️ POST 请求已接收：\n', JSON.stringify(request.body, null, "\t")); //JSON.stringify(request.body,null,"\t") 让 console 的 json 格式化，更易读
-  
+  //收到请求，向终端输出标记
+  console.log('🤖️ POST 请求已接收：\n');
+
+  //拼接 OpenAI API 转发地址
   const url = "https://api.openai.com" + request.url.substring(4);
-  //const fetchAPI = new URL(url);
+  console.log('🤖️ 即将将请求转发至：\n', url);
 
-  console.log('🤖️ 请求将转发至：\n', url);
-
-  // 部分代理工具，请求由浏览器发起，跨域请求时会先发送一个 preflight 进行检查，也就是 OPTIONS 请求
-  // 需要响应该请求，否则后续的 POST 会失败
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'OPTIONS',
-    'Access-Control-Allow-Headers': '*',
-  };
-  if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
-
-  let body;
-  if (request.method === 'POST') body = request.body;
-
+  //读取 req 中的 Authorization，存放在 authKey 中
   const authKey = request.header("Authorization");
-  console.log('🤖️ authKey：\n', authKey);
-
   if (!authKey) return new Response("Not allowed", { status: 403 });
-/*
-  const payload = {
-    method: "POST",
-    headers: {
-      'Content-Type': "application/json",
-      'Authorization': authKey
-    },
-    body, //body: typeof body === 'object' ? JSON.stringify(body) : '{}',
-  };
+  console.log('🤖️ req.header.Authorization：\n', authKey);
 
-  console.log('🤖️ payload：\n', payload);
-  console.log('🤖️ fetch 的东西：\n', {
-    url,
-    payload
-  });
-  */
+  //读取 req 中的 body, 存放在 body 中
+  const body = request.body;
+  console.log('🤖️ req.body：\n', JSON.stringify(body, null, "\t"));
+
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
   response = await fetch(url, {
@@ -55,6 +32,7 @@ app.post("/api/v1*", async (request, response) => {
     },
     body: JSON.stringify(body),
   });
+  console.log('🤖️ 请求结果已返回\n');
 
   if (body && body.stream !== true) {
     console.log('🤖️ !== stream');
