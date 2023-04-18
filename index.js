@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/", async (request, response) => {
+app.post("/openai-proxy", async (request, response) => {
 
   const url = new URL(request.url);
   const fetchAPI = request.url.replace(url.host, 'api.openai.com');
