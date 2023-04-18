@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.post("/api/v1*", async (request, response) => {
   //收到请求，向终端输出标记
-  console.log('\n🤖️ POST 请求已接收，开始处理 🤖️\n');
+  console.log('\n🤖️ POST 请求已接收，开始处理 🤖️');
 
   //拼接 OpenAI API 转发地址
   const url = "https://api.openai.com" + request.url.substring(4);
