@@ -40,6 +40,10 @@ app.post("/api/v1*", async (request, response) => {
   };
 
   console.log('🤖️ payload：\n', payload);
+  console.log('🤖️ fetch 的东西：\n', {
+    fetchAPI,
+    payload
+  });
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
   response = await fetch(fetchAPI, payload);
