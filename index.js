@@ -9,7 +9,7 @@ app.post("/api/v1*", async (request, response) => {
   console.log('🤖️ POST 请求已接收：\n', JSON.stringify(request.body, null, "\t")); //JSON.stringify(request.body,null,"\t") 让 console 的 json 格式化，更易读
   
   const url = "https://api.openai.com" + request.url.substring(4);
-  const fetchAPI = new URL(url);
+  //const fetchAPI = new URL(url);
 
   console.log('🤖️ 请求将转发至：\n', fetchAPI);
 
@@ -46,7 +46,7 @@ app.post("/api/v1*", async (request, response) => {
   });
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
-  response = await fetch(fetchAPI, payload);
+  response = await fetch(url, payload);
   console.log('🤖️ get response');
 
   if (body && body.stream !== true) {
