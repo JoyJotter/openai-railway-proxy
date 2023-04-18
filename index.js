@@ -29,7 +29,7 @@ app.post("/api/v1*", async (request, response) => {
   console.log('🤖️ authKey：\n', authKey);
 
   if (!authKey) return new Response("Not allowed", { status: 403 });
-
+/*
   const payload = {
     method: "POST",
     headers: {
@@ -44,10 +44,17 @@ app.post("/api/v1*", async (request, response) => {
     url,
     payload
   });
+  */
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
-  response = await fetch(url, payload);
-  console.log('🤖️ get response');
+  response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': authKey
+    },
+    body: JSON.stringify(body),
+  });
 
   if (body && body.stream !== true) {
     console.log('🤖️ !== stream');
