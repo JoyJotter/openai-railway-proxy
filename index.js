@@ -34,7 +34,7 @@ app.post("/api/v1*", async (request, response) => {
   });
 
   console.log('\n🤖️ 请求结果已返回 🤖️\n');
-  return response.status(result.status).json(result);
+  return response.status(result.status).JSON.stringify(result,null,"\t");
 });
 
 app.listen(PORT, () => {
