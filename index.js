@@ -33,8 +33,8 @@ app.post("/api/v1*", async (request, response) => {
   const payload = {
     method: request.method,
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": authKey,
+      'Content-Type': "application/json",
+      'Authorization': authKey
     },
     body
     //body: typeof body === 'object' ? JSON.stringify(body) : '{}',
