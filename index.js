@@ -44,9 +44,11 @@ app.post("/api/v1*", async (request, response) => {
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
   response = await fetch(fetchAPI, payload);
+  console.log('🤖️ get response');
+
   if (body && body.stream !== true) {
     console.log('🤖️ !== stream');
-    return response = new Response(JSON.stringify(results, null, "\t"), {
+    return new Response(JSON.stringify(response, null, "\t"), {
       status: response.status,
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +57,7 @@ app.post("/api/v1*", async (request, response) => {
       },
     });
   } else {
-    return response = new Response(response.body, {
+    return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
       headers: response.headers,
