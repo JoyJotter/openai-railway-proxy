@@ -6,8 +6,8 @@ const app = express();
 app.use(express.json());
 
 app.post("/openai-proxy", async (request, response) => {
-  console.log('POST 请求已接收：', request.body);
-  response.status(200).send("post 请求已收到");
+  console.log('POST 请求已接收：\n', JSON.stringify(request.body));
+
   /*
   const url = new URL(request.url);
   const fetchAPI = request.url.replace(url.host, 'api.openai.com');
