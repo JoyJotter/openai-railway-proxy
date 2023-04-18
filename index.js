@@ -36,10 +36,10 @@ app.post("/openai-proxy", async (request, response) => {
   };
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
-  const response = await fetch(fetchAPI, payload);
+  response = await fetch(fetchAPI, payload);
   if (body && body.stream !== true) {
     const results = await response.json();
-    return new Response(JSON.stringify(results), {
+    return new Response(JSON.stringify(results,null,"\t"), {
       status: response.status,
       headers: {
         "Content-Type": "application/json",
