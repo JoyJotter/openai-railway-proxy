@@ -34,23 +34,7 @@ app.post("/api/v1*", async (request, response) => {
   });
 
   console.log('\n🤖️ 请求结果已返回 🤖️\n');
-
-  if (body && body.stream !== true) {
-    return new Response(JSON.stringify(result, null, "\t"), {
-      status: result.status,
-      headers: {
-        "Content-Type": "application/json",
-        "Cross-Origin-Resource-Policy": "Cross-Origin",
-        "Access-Control-Allow-Origin": "*"
-      },
-    });
-  } else {
-    return new Response(result.body, {
-      status: result.status,
-      statusText: result.statusText,
-      headers: result.headers,
-    });
-  }
+  return response.status(result.status).json(result);
 });
 
 app.listen(PORT, () => {
