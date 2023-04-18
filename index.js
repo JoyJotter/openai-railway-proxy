@@ -23,9 +23,9 @@ app.post("/api/v1*", async (request, response) => {
   if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
   let body;
-  if (request.method === 'POST') body = await request.body;
+  if (request.method === 'POST') body = request.body;
 
-  const authKey = request.headers.get('Authorization');
+  const authKey = request.headers.Authorization;
   if (!authKey) return new Response("Not allowed", { status: 403 });
 
   const payload = {
@@ -40,7 +40,7 @@ app.post("/api/v1*", async (request, response) => {
   // 入参中如果包含了 stream=true，则表现形式为流式输出
   response = await fetch(fetchAPI, payload);
   if (body && body.stream !== true) {
-    const results = await response.json();
+    const results = response;
     return new Response(JSON.stringify(results, null, "\t"), {
       status: response.status,
       headers: {
