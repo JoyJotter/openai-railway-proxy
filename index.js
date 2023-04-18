@@ -28,6 +28,8 @@ app.post("/api/v1*", async (request, response) => {
   const authKey = request.headers.Authorization;
   if (!authKey) return new Response("Not allowed", { status: 403 });
 
+  console.log('🤖️ authKey：\n', authKey);
+
   const payload = {
     method: request.method,
     headers: {
@@ -36,6 +38,8 @@ app.post("/api/v1*", async (request, response) => {
     },
     body: typeof body === 'object' ? JSON.stringify(body) : '{}',
   };
+
+  console.log('🤖️ payload：\n', payload);
 
   // 入参中如果包含了 stream=true，则表现形式为流式输出
   response = await fetch(fetchAPI, payload);
