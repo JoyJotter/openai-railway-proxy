@@ -1,4 +1,3 @@
-const http = require('http');
 const PORT = process.env.PORT || 3000;
 
 const express = require("express");
@@ -7,7 +6,9 @@ const app = express();
 app.use(express.json());
 
 app.post("/openai-proxy", async (request, response) => {
-
+  console.log('POST 请求已接收：', request.body);
+  response.status(200).send("post 请求已收到");
+  /*
   const url = new URL(request.url);
   const fetchAPI = request.url.replace(url.host, 'api.openai.com');
 
@@ -54,8 +55,9 @@ app.post("/openai-proxy", async (request, response) => {
       headers: response.headers,
     });
   }
+  */
 });
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
