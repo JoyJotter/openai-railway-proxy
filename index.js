@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/", async (request, response) => {
+app.post(/v/, async (request, response) => {
   console.log('POST 请求已接收：\n', JSON.stringify(request.body,null,"\t")); //JSON.stringify(request.body,null,"\t") 让 console 的 json 格式化，更易读
 
   const url = new URL(request.url);
