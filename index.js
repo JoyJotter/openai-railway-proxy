@@ -3,14 +3,18 @@ const fetch = require('node-fetch');
 const express = require("express");
 const app = express();
 
+// 本地测试用小炒雀 https://xiaochaoque.com
+// const API_HOST = 'https://xiaochaoque.com';
+const API_HOST = 'https://api.openai.com';
+
 app.use(express.json());
 
-app.post("/api/v1*", async (request, response) => {
+app.post("/api/*", async (request, response) => {
   //收到请求，向终端输出标记
   console.log('\n🤖️ POST 请求已接收，开始处理 🤖️');
 
   //拼接 OpenAI API 转发地址
-  const url = "https://api.openai.com" + request.url.substring(4);
+  const url = API_HOST + request.url.substring(4);
   console.log('\n🤖️ 即将将请求转发至：🤖️\n', url);
 
   //读取 req 中的 Authorization，存放在 authKey 中
@@ -33,8 +37,16 @@ app.post("/api/v1*", async (request, response) => {
     body: JSON.stringify(body),
   });
 
+  const resultJSON = await result.json();
+
   console.log('\n🤖️ 请求结果已返回 🤖️\n');
-  return response.status(result.status).send(JSON.stringify(result, null, "\t"));
+
+  response.set({
+    "Content-Type": "application/json",
+    "Cross-Origin-Resource-Policy": "Cross-Origin",
+    "Access-Control-Allow-Origin": "*"
+  })
+  return response.status(result.status).send(resultJSON);
 });
 
 app.listen(PORT, () => {
