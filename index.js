@@ -19,7 +19,6 @@ app.post("/api/*", async (request, response) => {
   //读取 req 中的 body, 存放在 body 中
   const body = request.body;
 
-  // 入参中如果包含了 stream=true，则表现形式为流式输出
   try {
     let result = await fetch(url, {
       method: 'POST',
@@ -39,7 +38,6 @@ app.post("/api/*", async (request, response) => {
   } catch {
     response.status(500).json({ error: error.message });
   }
-
 });
 
 app.listen(PORT, () => {
