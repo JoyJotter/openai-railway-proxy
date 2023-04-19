@@ -1,5 +1,5 @@
 {
-  "name": "openai-forward-proxy",
+  "name": "openai-railway-proxy",
   "version": "1.0.0",
   "description": "An openai forward proxy",
   "main": "index.js",
@@ -19,6 +19,6 @@
     "nodemon": "^2.0.22"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon index.js"
   }
 }
